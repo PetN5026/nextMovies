@@ -5,11 +5,16 @@ export default async function handler(req, res) {
     try {
       const { movieTitle } = req.query;
       const query = { title: movieTitle };
-
-      let results = await moviesCollections.findOne(query);
-
-      res.status(200).json(results);
-    } catch (error) {}
+      const options = {
+        sort: { title: 1 },
+      };
+      let curserPointer = reviewCollections.find(query, options);
+      const array = await curserPointer.toArray();
+      console.log(array);
+      res.status(200).json(array);
+    } catch (error) {
+      console.log(error);
+    }
   } else if (req.method === "POST") {
     try {
       const { movieTitle, reviewBody } = req.body;
