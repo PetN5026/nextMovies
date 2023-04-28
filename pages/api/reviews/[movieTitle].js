@@ -1,0 +1,36 @@
+// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import { moviesCollections, reviewCollections } from "../../../db/index";
+export default async function handler(req, res) {
+  if (req.method === "GET") {
+    try {
+      const { movieTitle } = req.query;
+      const query = { title: movieTitle };
+
+      let results = await moviesCollections.findOne(query);
+
+      res.status(200).json(results);
+    } catch (error) {}
+  } else if (req.method === "POST") {
+    try {
+      const { movieTitle, reviewBody } = req.body;
+      const doc = {
+        title: movieTitle,
+        review: reviewBody,
+      };
+      const result = await reviewCollections.insertOne(doc);
+      const filter = { title: movieTitle };
+      const updateDoc = {
+        $push: {
+          reviewIds: result.insertedId,
+        },
+      };
+      let results = await moviesCollections.updateOne(filter, updateDoc);
+      //will want to take result.insertedId and stuff it in the movie collection+
+      res.status(201).json(results);
+    } catch (error) {
+      console.log(error);
+    }
+  } else {
+    res.status(404).json({ error: "wrong action" });
+  }
+}
