@@ -1,5 +1,3 @@
-//mongodb+srv://Banana:adedPJX82HbCIMta@cluster0.3gi7jtk.mongodb.net/test
-
 import { MongoClient } from "mongodb";
 const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@${process.env.MONGO_PORT}/test`;
 
