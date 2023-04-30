@@ -4,9 +4,10 @@ export default function SingleMovie({}) {
   const router = useRouter();
   const { movie } = router.query;
   const [single, setSingle] = useState({});
-  const [reviews, setReviews] = useState({});
+  const [reviews, setReviews] = useState([]);
   // console.log(movie);
   console.log("single", single);
+  console.log("review", reviews);
   useEffect(() => {
     if (!router.isReady) {
       return;
@@ -33,11 +34,11 @@ export default function SingleMovie({}) {
     return (
       <>
         <p>{movie}</p>
-        {/* <ul>
-        {reviews.map((review) => {
-          return <li key={review._id}>{review.review}</li>;
-        })}
-      </ul> */}
+        <ul>
+          {reviews.map((review) => {
+            return <li key={review._id}>{review.review}</li>;
+          })}
+        </ul>
         <img src={single.poster} />
       </>
     );
