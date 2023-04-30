@@ -10,7 +10,7 @@ export default async function handler(req, res) {
       };
       let curserPointer = reviewCollections.find(query, options);
       const array = await curserPointer.toArray();
-      console.log(array);
+      // console.log(array);
       res.status(200).json(array);
     } catch (error) {
       console.log(error);
