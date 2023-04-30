@@ -35,6 +35,7 @@ export default function SingleMovie({}) {
       <>
         <p>{movie}</p>
         <ul>
+          {!reviews.length && <p>No reviews</p>}
           {reviews.map((review) => {
             return <li key={review._id}>{review.review}</li>;
           })}
