@@ -31,7 +31,7 @@ export default async function handler(req, res) {
       };
       let results = await moviesCollections.updateOne(filter, updateDoc);
       //will want to take result.insertedId and stuff it in the movie collection+
-      res.status(201).json(results);
+      res.status(201).json(result);
     } catch (error) {
       console.log(error);
     }
