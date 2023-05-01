@@ -35,6 +35,9 @@ export default async function handler(req, res) {
     } catch (error) {
       console.log(error);
     }
+  } else if (req.method == "DELETE") {
+    try {
+    } catch (error) {}
   } else {
     res.status(404).json({ error: "wrong action" });
   }
