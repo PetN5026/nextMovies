@@ -14,5 +14,7 @@ export default async function handler(req, res) {
     } catch (error) {
       console.log(error);
     }
+  } else {
+    res.json({ error: "wrong method" });
   }
 }
