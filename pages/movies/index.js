@@ -2,7 +2,9 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import OneMovie from "@/components/OneMovie";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../api/auth/[...nextauth]";
+
 export default function MovieHome() {
   const dummy = [
     { title: "movie1", author: "author1" },
@@ -25,6 +27,7 @@ export default function MovieHome() {
     const newArray = [...movies, { title: "movie3", author: "author3" }];
     setMovies(newArray);
   }
+
   return (
     <div>
       <p>Hello</p>
