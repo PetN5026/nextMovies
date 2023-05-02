@@ -43,10 +43,15 @@ export default function SingleMovie({}) {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        body: json.stringify({ title: movie }),
+        body: JSON.stringify({ title: movie }),
       },
     });
-
+    const reviewArray = await fetch(`/api/movies/delete/${movie}/${deleteId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     setReviews(deletedReviews);
   }
   useEffect(() => {
