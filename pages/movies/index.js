@@ -2,10 +2,10 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import OneMovie from "@/components/OneMovie";
 import { useState, useEffect } from "react";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "../api/auth/[...nextauth]";
+import { useSession } from "next-auth/react";
 
 export default function MovieHome() {
+  const { data: session } = useSession();
   const dummy = [
     { title: "movie1", author: "author1" },
     { title: "movie2", author: "author2" },
@@ -28,18 +28,22 @@ export default function MovieHome() {
     setMovies(newArray);
   }
 
-  return (
-    <div>
-      <p>Hello</p>
-      {movies.map((movie) => {
-        return (
-          <div key={movie.title}>
-            <Link href={`/movies/${movie.title}`}>{movie.title}</Link>
-            <img src={movie.poster} />
-          </div>
-        );
-      })}
-      <button onClick={addTest}>Add</button>
-    </div>
-  );
+  if (session) {
+    return (
+      <div>
+        <p>Hello</p>
+        {movies.map((movie) => {
+          return (
+            <div key={movie.title}>
+              <Link href={`/movies/${movie.title}`}>{movie.title}</Link>
+              <img src={movie.poster} />
+            </div>
+          );
+        })}
+        <button onClick={addTest}>Add</button>
+      </div>
+    );
+  } else {
+    return <p>login please</p>;
+  }
 }
