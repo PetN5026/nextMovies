@@ -41,7 +41,7 @@ export default function MovieHome() {
             </div>
           );
         })}
-        <button onClick={addTest}>Add</button>
+        {session.user.role == "admin" && <button onClick={addTest}>Add</button>}
       </div>
     );
   } else {

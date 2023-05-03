@@ -1,6 +1,9 @@
 import { useRouter } from "next/router";
 import { useState, useEffect, useRef } from "react";
+import { useSession } from "next-auth/react";
 export default function SingleMovie({}) {
+  const { data: session } = useSession();
+  console.log("session in /movies", session);
   const router = useRouter();
   const { movie } = router.query;
   const [single, setSingle] = useState({});
@@ -8,8 +11,19 @@ export default function SingleMovie({}) {
   const textRef = useRef("");
   async function submitHandler(e) {
     e.preventDefault();
-    console.log("addReview", textRef.current.value);
-    const newReview = { movieTitle: movie, reviewBody: textRef.current.value };
+    console.log(
+      "addReview",
+      textRef.current.value,
+      session.user.email,
+      session.user.name
+    );
+
+    const newReview = {
+      movieTitle: movie,
+      reviewBody: textRef.current.value,
+      userName: session.user.name,
+      userEmail: session.user.email,
+    };
     console.log(JSON.stringify(newReview));
     const res = await fetch(`/api/reviews/${movie}`, {
       method: "POST",
@@ -19,12 +33,12 @@ export default function SingleMovie({}) {
       body: JSON.stringify(newReview),
     });
     let jsonRes = await res.json();
-    // console.log(jsonRes.insertedId);
-    // console.log(res.json);
     const returnedReview = {
       _id: jsonRes.insertedId,
       title: movie,
       review: textRef.current.value,
+      userEmail: session.user.email,
+      userName: session.user.name,
     };
     setReviews([...reviews, returnedReview]);
   }
@@ -106,6 +120,7 @@ export default function SingleMovie({}) {
                     />
                   </svg>
                 </button>
+                <p>by {review.userName}</p>
               </li>
             );
           })}

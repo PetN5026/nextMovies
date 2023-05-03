@@ -17,10 +17,12 @@ export default async function handler(req, res) {
     }
   } else if (req.method === "POST") {
     try {
-      const { movieTitle, reviewBody } = req.body;
+      const { movieTitle, reviewBody, userName, userEmail } = req.body;
       const doc = {
         title: movieTitle,
         review: reviewBody,
+        userName,
+        userEmail,
       };
       const result = await reviewCollections.insertOne(doc);
       const filter = { title: movieTitle };
