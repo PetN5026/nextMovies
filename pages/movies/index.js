@@ -2,8 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import OneMovie from "@/components/OneMovie";
 import { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
-
+import { getSession, useSession } from "next-auth/react";
 export default function MovieHome() {
   const { data: session } = useSession();
   const dummy = [
@@ -11,7 +10,9 @@ export default function MovieHome() {
     { title: "movie2", author: "author2" },
   ];
   const [movies, setMovies] = useState(dummy);
-
+  // console.log("session", session);
+  // session.user.test = "test";
+  //session is straight from google and not my db so I will need to grab info from my db and maybe set it into sessions?
   useEffect(() => {
     async function ret() {
       const data = await fetch("/api/movies/");
