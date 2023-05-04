@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useState, useEffect, useRef } from "react";
 import { useSession } from "next-auth/react";
+import NotLoggedIn from "@/components/NotLoggedIn";
 export default function SingleMovie({}) {
   const { data: session } = useSession();
   console.log("session in /movies", session);
@@ -90,7 +91,7 @@ export default function SingleMovie({}) {
     ret();
   }, [router.isReady]);
 
-  if (single) {
+  if (session && single) {
     return (
       <>
         <p>{movie}</p>
@@ -143,7 +144,9 @@ export default function SingleMovie({}) {
         <img src={single.poster} />
       </>
     );
-  } else {
+  } else if (session && !single) {
     return <p>loading</p>;
+  } else {
+    return <NotLoggedIn />;
   }
 }
