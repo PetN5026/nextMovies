@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { getServerSession } from "next-auth";
-import { moviesCollections } from "../../../db/index";
 import { authOptions } from "../auth/[...nextauth]";
+import { moviesCollections } from "../../../db/index";
 export default async function handler(req, res) {
   const session = await getServerSession(req, res, authOptions);
   if (session) {
@@ -16,7 +16,8 @@ export default async function handler(req, res) {
       console.log(error);
     }
   } else {
-    res.status(401).json("not signed in");
+    console.log("here");
+    res.status(401).json({ message: "not signed in" });
+    res.end();
   }
-  res.end();
 }

@@ -26,6 +26,14 @@ export const authOptions = {
     }),
     // ...add more providers here
   ],
+  // session: {
+  //   strategy: "jwt",
+  //   maxAge: 30 * 24 * 60 * 60,
+  //   updateAge: 24 * 60 * 60,
+  //   generateSessionToken: () => {
+  //     return randomUUID?.() ?? randomBytes(32).toString("hex");
+  //   },
+  // },
   callbacks: {
     async session({ session, user, token }) {
       if (user.role) {

@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import OneMovie from "@/components/OneMovie";
 import { useState, useEffect } from "react";
 import { getSession, useSession } from "next-auth/react";
+
 export default function MovieHome() {
   const { data: session } = useSession();
   const dummy = [
