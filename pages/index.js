@@ -14,14 +14,17 @@ export default function Home() {
   if (data) {
     return (
       <>
-        <p>Logged in</p>
+        <p>{`Logged in as ${data.user.name}`}</p>
         <button onClick={() => signOut({ redirect: false })}>Sign out</button>
       </>
     );
   }
   return (
     <>
-      <p>not logged in</p> <button onClick={() => signIn()}>Sign in</button>
+      <p>You are not logged in please login with the button below</p>{" "}
+      <button className="bg-orange-200 rounded-md" onClick={() => signIn()}>
+        Sign in
+      </button>
     </>
   );
   // return (

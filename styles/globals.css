@@ -17,7 +17,7 @@
 }
 
 .navButtons {
-  @apply text-neutral-500 p-2 text-center h-fit md:w-24 justify-center w-full;
+  @apply text-neutral-500 mx-2 p-2 text-center h-fit md:w-24 justify-center w-full;
 }
 
 body {
