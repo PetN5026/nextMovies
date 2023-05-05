@@ -16,6 +16,10 @@
   }
 }
 
+.navButtons {
+  @apply text-neutral-500 p-2 text-center h-fit md:w-24 justify-center w-full;
+}
+
 body {
   /* color: rgb(var(--foreground-rgb));
   background: linear-gradient(
