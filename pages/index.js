@@ -1,4 +1,5 @@
 import Image from "next/image";
+import NotLoggedIn from "@/components/NotLoggedIn";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import { useSession, signIn, signOut } from "next-auth/react";
