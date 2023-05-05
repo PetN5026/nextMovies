@@ -21,7 +21,9 @@ export default function Navbar() {
       <div className="flex flex-grow justify-end items-center">
         {session ? (
           <p className="px-4 text-center"> Signed in as {session.user.name}</p>
-        ) : null}
+        ) : (
+          <p>Not signed in</p>
+        )}
         <button
           className="px-4"
           onClick={session ? signOutHelper : signInHelper}
