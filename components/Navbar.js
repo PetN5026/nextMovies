@@ -18,7 +18,10 @@ export default function Navbar() {
       <Link className="navButtons" href={"/movies"}>
         <p className="text-decoration-line : underline">Movies</p>
       </Link>
-      <div className="flex flex-grow justify-end">
+      <div className="flex flex-grow justify-end items-center">
+        {session ? (
+          <p className="px-4 text-center"> Signed in as {session.user.name}</p>
+        ) : null}
         <button
           className="px-4"
           onClick={session ? signOutHelper : signInHelper}
