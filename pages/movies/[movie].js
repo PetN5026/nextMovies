@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
 import { useState, useEffect, useRef } from "react";
 import { useSession } from "next-auth/react";
+import ReactPlayer from "react-player/youtube";
+import Iframe from "react-iframe";
 import NotLoggedIn from "@/components/NotLoggedIn";
 import Image from "next/image";
 export default function SingleMovie({}) {
@@ -185,6 +187,8 @@ export default function SingleMovie({}) {
             </form>
           </div>
         </div>
+        {/* {single.trailerLink && <ReactPlayer url={single.trailerLink} />} */}
+        {single.trailerLink && <Iframe url={single.trailerLink} />}
       </>
     );
   } else if (session && !single) {
