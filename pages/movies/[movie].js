@@ -97,12 +97,25 @@ export default function SingleMovie({}) {
       <>
         <div>
           {/*Put a background from background array here math.random single.backdrops.length *100? make it absolute or something? */}
-          <p>{movie}</p>
-          <div>
-            <Image src={single.poster} width={100} height={100} />
-            {single.backdrops && (
-              <Image src={single.backdrops[0]} width={400} height={400} />
-            )}
+          <div className="bg-white items-center justify-center rounded-md">
+            <Image
+              className="absolute z-10"
+              src={single.poster}
+              width={100}
+              height={100}
+            />
+            <div className="flex items-center justify-center">
+              {single.backdrops && (
+                <img
+                  src={
+                    single.backdrops[
+                      Math.floor(Math.random() * single.backdrops.length)
+                    ]
+                  }
+                />
+              )}
+            </div>
+            <p className="text-center">{movie}</p>
           </div>
         </div>
         <div className="flex flex-col items-center justify-center">
@@ -144,7 +157,7 @@ export default function SingleMovie({}) {
               );
             })}
           </ul>
-          <div className="m-8 flex flex-col justify-center items-center w-3/4">
+          <div className="m-8 flex flex-col justify-center items-center w-3/4 bg-slate-400 rounded-md">
             <form
               className="flex flex-col w-full justify-center items-center"
               onSubmit={submitHandler}
@@ -166,7 +179,7 @@ export default function SingleMovie({}) {
                   console.log(textRef.current.value);
                 }}
               ></textarea>
-              <button className="bg-slate-400 rounded-md max-w-">
+              <button className="bg-blue-500 rounded-md text-white border-b-4 border-blue-700 mt-2">
                 Submit Review
               </button>
             </form>

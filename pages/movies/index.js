@@ -42,7 +42,39 @@ export default function MovieHome() {
   if (session) {
     return (
       <div>
-        <button onClick={sortHandle}>sort</button>
+        {/* <button
+          className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded mt-2"
+          onClick={sortHandle}
+        >
+          sort
+        </button> */}
+        <div className="bg-slate-400">
+          <label className="bg-slate-400 mx-4">Sort</label>
+          <select
+            onChange={(e) => {
+              console.log(e.currentTarget.value);
+              const sort = e.currentTarget.value;
+              const copy = [...movies];
+              console.log(copy);
+              if (sort == 1) {
+                copy.sort((a, b) => {
+                  return a.title.toLowerCase() > b.title.toLowerCase();
+                });
+              } else {
+                copy.sort((a, b) => {
+                  return a.title.toLowerCase() < b.title.toLowerCase();
+                });
+              }
+              console.log(copy);
+              setMovies(copy);
+            }}
+          >
+            <option className="p-2 m-2" value={1}>
+              A...Z
+            </option>
+            <option value={-1}>Z...A</option>
+          </select>
+        </div>
         {movies.map((movie) => {
           return (
             <div
