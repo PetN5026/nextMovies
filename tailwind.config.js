@@ -16,6 +16,16 @@ module.exports = {
       fontFamily: {
         rye: ["Rubik Iso", "cursive"],
       },
+      minHeight: {
+        reviewBoxHeight: "80px",
+      },
+      minWidth: {
+        reviewBoxWidth: "400px",
+        reviewBoxWidthMd: "896px",
+      },
+      maxWidth: {
+        textAreaReview: "75%",
+      },
     },
   },
   plugins: [],

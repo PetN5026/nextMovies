@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import OneMovie from "@/components/OneMovie";
 import { useState, useEffect } from "react";
@@ -30,15 +31,43 @@ export default function MovieHome() {
     setMovies(newArray);
   }
 
+  function sortHandle() {
+    const sorted = [...movies];
+    console.log(sorted);
+    sorted.sort((a, b) => a.title.toLowerCase() < b.title.toLowerCase());
+    console.log(sorted);
+    setMovies(sorted);
+  }
+
   if (session) {
     return (
       <div>
-        <p>Hello</p>
+        <button onClick={sortHandle}>sort</button>
         {movies.map((movie) => {
           return (
-            <div key={movie.title}>
-              <Link href={`/movies/${movie.title}`}>{movie.title}</Link>
-              <img src={movie.poster} />
+            <div
+              className="w-4/5 flex m-4 p-4 bg-slate-200 rounded-md"
+              key={movie.title}
+            >
+              <Image src={movie.poster} width={"100"} height={"100"} />
+              <div className="m-2 p-2">
+                <Link href={`/movies/${movie.title}`}>
+                  <p className="underline">{movie.title}</p>
+                </Link>
+                <p>{`Release date : ${movie.releaseDate}`}</p>
+                <div>
+                  <ul>
+                    {movie.genres &&
+                      movie.genres.map((genre) => {
+                        return (
+                          <li key={genre} className="text-xs list-disc">
+                            {`${genre}`}
+                          </li>
+                        );
+                      })}
+                  </ul>
+                </div>
+              </div>
             </div>
           );
         })}

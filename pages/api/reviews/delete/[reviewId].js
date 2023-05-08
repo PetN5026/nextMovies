@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb";
 import { reviewCollections } from "../../../../db/index";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../auth/[...nextauth]";
+import { authOptions } from "../../auth/[...nextauth]";
 export default async function handler(req, res) {
   const session = await getServerSession(req, res, authOptions);
   const { reviewId } = req.query;
