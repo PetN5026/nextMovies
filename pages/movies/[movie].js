@@ -12,6 +12,7 @@ export default function SingleMovie({}) {
   const { movie } = router.query;
   const [single, setSingle] = useState({});
   const [reviews, setReviews] = useState([]);
+  const [invalidReview, setInvalidReview] = useState(false);
   const textRef = useRef("");
   async function submitHandler(e) {
     e.preventDefault();
@@ -21,30 +22,35 @@ export default function SingleMovie({}) {
     //   session.user.email,
     //   session.user.name
     // );
-
-    const newReview = {
-      movieTitle: movie,
-      reviewBody: textRef.current.value,
-      userName: session.user.name,
-      userEmail: session.user.email,
-    };
-    // console.log(JSON.stringify(newReview));
-    const res = await fetch(`/api/reviews/${movie}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newReview),
-    });
-    let jsonRes = await res.json();
-    const returnedReview = {
-      _id: jsonRes.insertedId,
-      title: movie,
-      review: textRef.current.value,
-      userEmail: session.user.email,
-      userName: session.user.name,
-    };
-    setReviews([...reviews, returnedReview]);
+    if (textRef.current.value.trim().length) {
+      const newReview = {
+        movieTitle: movie,
+        reviewBody: textRef.current.value,
+        userName: session.user.name,
+        userEmail: session.user.email,
+      };
+      // console.log(JSON.stringify(newReview));
+      const res = await fetch(`/api/reviews/${movie}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newReview),
+      });
+      let jsonRes = await res.json();
+      const returnedReview = {
+        _id: jsonRes.insertedId,
+        title: movie,
+        review: textRef.current.value,
+        userEmail: session.user.email,
+        userName: session.user.name,
+      };
+      setInvalidReview(false);
+      textRef.current.value = "";
+      setReviews([...reviews, returnedReview]);
+    } else {
+      setInvalidReview(true);
+    }
   }
   // console.log(movie);
   // console.log("single", single);
@@ -103,8 +109,8 @@ export default function SingleMovie({}) {
             <Image
               className="absolute z-10"
               src={single.poster}
-              width={100}
-              height={100}
+              width={200}
+              height={200}
             />
             {single.trailerLink && (
               <Iframe className="absolute right-0" url={single.trailerLink} />
@@ -180,10 +186,17 @@ export default function SingleMovie({}) {
                 placeholder="Write your review here"
                 rows={4}
                 ref={textRef}
+                onClick={() => {
+                  console.log("clicked");
+                }}
+
                 // onChange={() => {
                 //   console.log(textRef.current.value);
                 // }}
               ></textarea>
+              <p className="text-rose-700">
+                {invalidReview ? "Your review is empty" : null}
+              </p>
               <button className="bg-blue-500 rounded-md text-white border-b-4 border-blue-700 mt-2">
                 Submit Review
               </button>
