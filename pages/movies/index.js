@@ -19,13 +19,13 @@ export default function MovieHome() {
     async function ret() {
       const data = await fetch("/api/movies/");
       const object = await data.json();
-      console.log(object);
+      // console.log(object);
       setMovies(object);
     }
     ret();
   }, []);
 
-  console.log("movies", movies);
+  // console.log("movies", movies);
   function addTest() {
     const newArray = [...movies, { title: "movie3", author: "author3" }];
     setMovies(newArray);
@@ -33,9 +33,9 @@ export default function MovieHome() {
 
   function sortHandle() {
     const sorted = [...movies];
-    console.log(sorted);
+    // console.log(sorted);
     sorted.sort((a, b) => a.title.toLowerCase() < b.title.toLowerCase());
-    console.log(sorted);
+    // console.log(sorted);
     setMovies(sorted);
   }
 
@@ -52,10 +52,10 @@ export default function MovieHome() {
           <label className="bg-slate-400 mx-4">Sort</label>
           <select
             onChange={(e) => {
-              console.log(e.currentTarget.value);
+              // console.log(e.currentTarget.value);
               const sort = e.currentTarget.value;
               const copy = [...movies];
-              console.log(copy);
+              // console.log(copy);
               if (sort == 1) {
                 copy.sort((a, b) => {
                   return a.title.toLowerCase() > b.title.toLowerCase();
@@ -65,7 +65,7 @@ export default function MovieHome() {
                   return a.title.toLowerCase() < b.title.toLowerCase();
                 });
               }
-              console.log(copy);
+              // console.log(copy);
               setMovies(copy);
             }}
           >

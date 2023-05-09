@@ -7,7 +7,7 @@ import NotLoggedIn from "@/components/NotLoggedIn";
 import Image from "next/image";
 export default function SingleMovie({}) {
   const { data: session } = useSession();
-  console.log("session in /movies", session);
+  // console.log("session in /movies", session);
   const router = useRouter();
   const { movie } = router.query;
   const [single, setSingle] = useState({});
@@ -15,12 +15,12 @@ export default function SingleMovie({}) {
   const textRef = useRef("");
   async function submitHandler(e) {
     e.preventDefault();
-    console.log(
-      "addReview",
-      textRef.current.value,
-      session.user.email,
-      session.user.name
-    );
+    // console.log(
+    //   "addReview",
+    //   textRef.current.value,
+    //   session.user.email,
+    //   session.user.name
+    // );
 
     const newReview = {
       movieTitle: movie,
@@ -28,7 +28,7 @@ export default function SingleMovie({}) {
       userName: session.user.name,
       userEmail: session.user.email,
     };
-    console.log(JSON.stringify(newReview));
+    // console.log(JSON.stringify(newReview));
     const res = await fetch(`/api/reviews/${movie}`, {
       method: "POST",
       headers: {
@@ -47,8 +47,8 @@ export default function SingleMovie({}) {
     setReviews([...reviews, returnedReview]);
   }
   // console.log(movie);
-  console.log("single", single);
-  console.log("review", reviews);
+  // console.log("single", single);
+  // console.log("review", reviews);
   async function deleteHandler(e) {
     // console.log(e.currentTarget.getAttribute("data-customid"));
     const deleteId = e.currentTarget.getAttribute("data-customid");
@@ -77,17 +77,17 @@ export default function SingleMovie({}) {
       return;
     }
     async function ret() {
-      console.log("movie", movie);
+      // console.log("movie", movie);
       const data = await fetch(`/api/movies/${movie}`);
-      console.log("data", data);
+      // console.log("data", data);
       const one = await data.json();
       // console.log(one);
       const reviewData = await fetch(`/api/reviews/${movie}`);
       const reviewJson = await reviewData.json();
-      console.log("reviewwwwwww", reviewJson);
+      // console.log("reviewwwwwww", reviewJson);
       setSingle(one);
       setReviews(reviewJson);
-      console.log("doneeeeeeeeeeeeeeeeeeee");
+      // console.log("doneeeeeeeeeeeeeeeeeeee");
     }
     if (!single) {
     }
@@ -106,6 +106,9 @@ export default function SingleMovie({}) {
               width={100}
               height={100}
             />
+            {single.trailerLink && (
+              <Iframe className="absolute right-0" url={single.trailerLink} />
+            )}
             <div className="flex items-center justify-center">
               {single.backdrops && (
                 <img
@@ -177,9 +180,9 @@ export default function SingleMovie({}) {
                 placeholder="Write your review here"
                 rows={4}
                 ref={textRef}
-                onChange={() => {
-                  console.log(textRef.current.value);
-                }}
+                // onChange={() => {
+                //   console.log(textRef.current.value);
+                // }}
               ></textarea>
               <button className="bg-blue-500 rounded-md text-white border-b-4 border-blue-700 mt-2">
                 Submit Review
@@ -188,7 +191,6 @@ export default function SingleMovie({}) {
           </div>
         </div>
         {/* {single.trailerLink && <ReactPlayer url={single.trailerLink} />} */}
-        {single.trailerLink && <Iframe url={single.trailerLink} />}
       </>
     );
   } else if (session && !single) {

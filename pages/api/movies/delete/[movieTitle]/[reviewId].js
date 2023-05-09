@@ -5,7 +5,7 @@ import { authOptions } from "../../../auth/[...nextauth]";
 export default async function handler(req, res) {
   const session = await getServerSession(req, res, authOptions);
   const { movieTitle, reviewId } = req.query;
-  console.log(movieTitle, reviewId);
+  // console.log(movieTitle, reviewId);
   if (session) {
     if (req.method === "DELETE") {
       try {

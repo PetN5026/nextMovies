@@ -18,7 +18,7 @@ if (process.env.NODE_ENV === "development") {
   client = new MongoClient(mongoURI, options);
   clientPromise = client.connect();
 }
-// console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>", client, clientPromise);
+
 export const db = client.db("movie-api-db");
 export const moviesCollections = db.collection("movies");
 export const reviewCollections = db.collection("reviews");

@@ -13,10 +13,9 @@ export default async function handler(req, res) {
 
       res.status(200).json(results);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   } else {
-    console.log("here");
     res.status(401).json({ message: "not signed in" });
     res.end();
   }

@@ -8,9 +8,9 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   const { data } = useSession();
 
-  if (data && data.user) {
-    console.log("logged in", data);
-  }
+  // if (data && data.user) {
+  //   console.log("logged in", data);
+  // }
   {
     return (
       <>
