@@ -5,14 +5,22 @@ export default function Login({ providers }) {
   console.log("providers", providers, Object.values(providers));
   return (
     <>
-      <div>Custom Login</div>
-      {Object.values(providers).map((provider) => {
-        return (
-          <button key={provider.id} onClick={() => signIn(provider.id)}>
-            {provider.name}
-          </button>
-        );
-      })}
+      <div className="mt-4 flex flex-col bg-slate-300 rounded-md items-center">
+        <div className="bg-red-200 w-1/2 flex flex-col p-4 m-4 rounded-md">
+          <p>Custom Login container</p>
+          {Object.values(providers).map((provider) => {
+            return (
+              <button
+                className="bg-stone-50 hover:bg-blue-400 text-black font-bold py-2 px-4 border-b-2 border-stone-400 hover:border-blue-500 rounded"
+                key={provider.id}
+                onClick={() => signIn(provider.id)}
+              >
+                {provider.name}
+              </button>
+            );
+          })}
+        </div>
+      </div>
     </>
   );
 }
