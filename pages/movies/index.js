@@ -49,8 +49,9 @@ export default function MovieHome() {
           sort
         </button> */}
         <div className="bg-slate-400">
-          <label className="bg-slate-400 mx-4">Sort</label>
+          {/* <label className="bg-slate-400 mx-4">Sort</label> */}
           <select
+            className="ml-4 rounded-sm"
             onChange={(e) => {
               // console.log(e.currentTarget.value);
               const sort = e.currentTarget.value;
@@ -69,6 +70,7 @@ export default function MovieHome() {
               setMovies(copy);
             }}
           >
+            <option>Sort</option>
             <option className="p-2 m-2" value={1}>
               A...Z
             </option>
