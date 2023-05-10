@@ -3,7 +3,7 @@ import Image from "next/image";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 export default function Login({ providers }) {
-  console.log("providers", providers, Object.values(providers));
+  // console.log("providers", providers, Object.values(providers));
 
   const icons = {
     google:
