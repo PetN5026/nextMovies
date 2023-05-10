@@ -39,6 +39,9 @@ export const authOptions = {
     },
   },
   adapter: MongoDBAdapter(clientPromise),
+  pages: {
+    signIn: "/login",
+  },
 };
 
 export default NextAuth(authOptions);
