@@ -16,7 +16,7 @@ export default function Home() {
       <>
         <div>
           <p className="text-center text-6xl font-rye flex flex-col">
-            MOVIES DATABASE PAGE
+            MyMDB DATABASE PAGE
           </p>
         </div>
         <div className="flex justify-evenly">
