@@ -15,9 +15,7 @@ export default function Home() {
     return (
       <>
         <div>
-          <p className="text-center text-6xl font-rye flex flex-col">
-            MyMDB DATABASE PAGE
-          </p>
+          <p className="text-center text-6xl font-rye flex flex-col">Melper</p>
         </div>
         <div className="flex justify-evenly">
           <Image
